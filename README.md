@@ -1,166 +1,213 @@
-# Candidate CRM Dashboard (KOTS Assignment)
+# Candidate CRM Dashboard
 
-Submission-ready project for the IT Testing Lead assignment:
-- Realistic candidate mock dataset (`mock_candidates.json`)
-- Appsmith implementation guide (`appsmith_layout_plan.md`)
-- QA checklist with edge cases and known limitations (`qa_test_checklist.md`)
-- Product note in a junior SDET voice (`product_note.md`)
-- Static web demo (`index.html`, `styles.css`, `app.js`) deployable to Netlify
+A simple internal dashboard built for a hiring team to manage and track job candidates through the recruitment pipeline. This was built as part of the KOTS assignment for the IT Testing Lead role.
 
-## Project Structure
-
-- `mock_candidates.json` - 14 realistic candidate records
-- `appsmith_layout_plan.md` - widgets, filters, bindings, and status update wiring
-- `qa_test_checklist.md` - practical scenario-based QA coverage
-- `product_note.md` - design decisions, assumptions, and future improvements
-- `index.html` / `styles.css` / `app.js` - optional frontend demo
-- `netlify.toml` - Netlify deployment config
-
-## Run Locally
-
-Because this project fetches `mock_candidates.json`, run it with a local server:
-
-```bash
-python3 -m http.server 8080
-```
-
-Open: `http://localhost:8080`
-
-## Deploy to Netlify
-
-1. Push this folder to a GitHub repository.
-2. In Netlify, choose **Add new site -> Import an existing project**.
-3. Select your repository.
-4. Build settings:
-   - Build command: *(leave empty)*
-   - Publish directory: `.`
-5. Deploy.
-
-## Appsmith Implementation (for assignment)
-
-1. Create a new Appsmith app.
-2. Use `mock_candidates.json` as the static data source (or Google Sheet).
-3. Follow `appsmith_layout_plan.md` to create widgets and bindings.
-4. Validate flows using `qa_test_checklist.md`.
-5. Add `product_note.md` content to your submission doc.
-
-## Submission Checklist
-
-- [ ] Appsmith App URL
-- [ ] Product note (5-10 lines)
-- [ ] QA checklist + edge cases + known limitations
-- [ ] Mention in-memory status update reset behavior on refresh
-
-## Notes
-
-- The static web dashboard is an extra demo artifact; the core assignment target is Appsmith.
-- Candidate status updates in the static demo are in-memory and reset on full page refresh.
-# 👥 Candidate CRM Dashboard
-
-A CRM-style dashboard for a hiring team to manage and filter job candidates through the hiring pipeline. Built as a KOTS assignment submission (IT Testing Lead role).
-
-<br>
-
-## ✨ Features
-
-| Feature | Description |
-|---------|-------------|
-| **Candidate Table** | View all 14 candidates with sortable columns (click headers to sort) |
-| **Live Search** | Search by name or email with debounced input (250ms) |
-| **Multi-Filter System** | Status (multi-select), YOE (min–max), Location (dropdown), Skills (multi-select) |
-| **Filter Tags** | See active filters as removable tags below the filter bar |
-| **Status Cards** | Clickable status summary cards that double as quick filters |
-| **Detail Panel** | Slide-in side panel showing full candidate details |
-| **Status Update** | Update a candidate's hiring status (in-memory, resets on refresh) |
-| **Toast Notifications** | Visual feedback on status updates and filter resets |
-| **Reset All Filters** | One-click reset for all active filters |
-| **Keyboard Support** | Press `Escape` to close panels and dropdowns |
-| **Responsive Design** | Works on desktop, tablet, and mobile screens |
-
-<br>
-
-## 🛠 Tech Stack
-
-- **HTML5** — Semantic structure
-- **CSS3** — Custom design system with CSS variables, glassmorphism, animations
-- **Vanilla JavaScript** — No frameworks, no dependencies, no build step
-- **Google Fonts** — Inter typeface
-- **Netlify** — Static site deployment
-
-<br>
-
-## 🚀 Deployment
-
-### Deploy on Netlify (Recommended)
-
-1. Push this repo to GitHub
-2. Go to [app.netlify.com](https://app.netlify.com)
-3. Click **"Add new site" → "Import an existing project"**
-4. Connect your GitHub repo
-5. Deploy settings (auto-detected from `netlify.toml`):
-   - **Build command**: *(leave empty)*
-   - **Publish directory**: `.`
-6. Click **Deploy** — your site will be live in ~30 seconds
-
-### Run Locally
-
-No installation or build step needed:
-
-```bash
-# Option 1: Just open the HTML file
-open index.html
-
-# Option 2: Use a local server (for best experience)
-npx serve .
-# or
-python3 -m http.server 8000
-```
-
-<br>
-
-## 📁 Project Structure
-
-```
-Assignment/
-├── index.html              # Main page
-├── styles.css              # Complete design system & styles
-├── app.js                  # Application logic (data, filters, UI)
-├── netlify.toml            # Netlify deployment config
-├── README.md               # This file
-├── mock_candidates.json    # Raw JSON dataset (reference)
-├── docs/
-│   ├── qa-test-checklist.md    # QA test scenarios + edge cases
-│   ├── product-note.md         # Design decisions & assumptions
-│   └── appsmith-layout-plan.md # Appsmith widget mapping guide
-```
-
-<br>
-
-## 📋 Documentation
-
-| Document | Description |
-|----------|-------------|
-| [QA Test Checklist](docs/qa-test-checklist.md) | 50+ test scenarios, 10 edge cases, 6 known limitations, smoke test |
-| [Product Note](docs/product-note.md) | Design decisions, assumptions, and improvement ideas |
-| [Appsmith Layout Plan](docs/appsmith-layout-plan.md) | Widget-by-widget guide for building this in Appsmith |
-
-<br>
-
-## ⚠️ Known Limitations
-
-1. **Status updates are in-memory** — they reset on page refresh (expected; would use Google Sheets API or REST backend for persistence)
-2. **No pagination** — all 14 candidates load at once (fine for this dataset, would add pagination at 50+)
-3. **Skills filter uses OR logic** — selecting multiple skills shows candidates with *any* of those skills
-4. **No YOE validation** — entering Min > Max shows empty results instead of a validation error
-
-<br>
-
-## 👤 Author
-
-**Krish Patel** — KOTS Assignment | IT Testing Lead Role
-
-<br>
+**Live Demo:** [View on Netlify](https://krish-crm-dashboard.netlify.app)
 
 ---
 
-*Built with ☕ and attention to detail.*
+## What This Project Does
+
+This dashboard lets a recruiter or hiring manager:
+
+- View all candidates in a single table
+- Search candidates by name or email
+- Filter by status, experience, location, or skills
+- Click on any candidate to see their full profile
+- Update a candidate's hiring status directly from the detail view
+
+The data is static JSON (no backend needed). Status updates work in-memory and reset on page refresh — this is documented as a known limitation.
+
+---
+
+## Project Structure
+
+```
+├── index.html              → Main HTML page (entry point)
+├── styles.css              → All styling — dark theme, layout, components
+├── app.js                  → Application logic — filters, rendering, events
+├── mock_candidates.json    → Dataset of 14 candidates (used as data source)
+├── netlify.toml            → Netlify deployment config
+├── .gitignore
+├── README.md
+└── docs/
+    ├── qa-test-checklist.md     → QA scenarios, edge cases, known limitations
+    ├── product-note.md          → My design decisions and assumptions
+    └── appsmith-layout-plan.md  → Widget-by-widget Appsmith mapping
+```
+
+---
+
+## Tech Stack
+
+- **HTML5** — page structure
+- **CSS3** — custom properties, flexbox, grid, animations
+- **Vanilla JavaScript** — no frameworks or dependencies
+- **Google Fonts** — Inter typeface
+- **Netlify** — static hosting
+
+No build step. No `npm install`. Just open `index.html`.
+
+---
+
+## Features
+
+### Search
+- Live search by candidate name or email
+- Debounced input (250ms) to avoid unnecessary re-renders
+- Clear button appears when text is entered
+
+### Filters
+- **Status** — multi-select dropdown (New, Screening, Shortlisted, Interviewed, Selected, Rejected)
+- **YOE** — min and max number inputs for years of experience range
+- **Location** — single-select dropdown, options derived from data
+- **Skills** — multi-select dropdown, OR logic (matches candidates with any selected skill)
+- **Reset All** — clears every filter and search input at once
+
+All filters work together using AND logic between filter types.
+
+### Status Summary Cards
+Six cards at the top showing candidate count per status. Clicking a card toggles that status filter — syncs with the dropdown.
+
+### Candidate Table
+- Displays: Name, Email, Role, YOE, Location, Status, Source
+- Click any column header to sort (ascending/descending toggle)
+- Status shown as color-coded badges
+- Long emails truncate with ellipsis
+- Empty state shown when no candidates match filters
+
+### Detail Panel
+- Slides in from the right when a row is clicked
+- Shows all candidate info: contact, experience, skills (as tags), notes
+- Status update dropdown + Update button at the bottom
+- Closes on overlay click, close button, or Escape key
+- Body scroll is locked while panel is open
+
+### Toast Notifications
+- Success toast on status update
+- Info toast on filter reset
+- Auto-dismiss after 3 seconds with slide-out animation
+
+---
+
+## How the Code Works
+
+### Data Flow
+
+```
+mock_candidates.json → loadData() → state.allCandidates
+                                         ↓
+                              applyFiltersAndRender()
+                                         ↓
+                              state.filteredCandidates
+                                         ↓
+                    ┌────────────────────────────────────┐
+                    │  renderStatusCards()                │
+                    │  renderResultsCount()               │
+                    │  renderActiveFilters()              │
+                    │  renderTable()                      │
+                    │  renderSortHeaders()                │
+                    └────────────────────────────────────┘
+```
+
+Everything goes through `applyFiltersAndRender()`. When any filter changes, search updates, or status is modified — this function re-runs the full pipeline.
+
+### Key Functions in `app.js`
+
+| Function | What it does |
+|----------|-------------|
+| `loadData()` | Fetches `mock_candidates.json` and stores it in state |
+| `applyFiltersAndRender()` | Runs all filters on raw data, sorts results, triggers all render functions |
+| `createDropdown()` | Builds a custom multi-select or single-select dropdown component |
+| `renderTable()` | Generates table rows from filtered data, attaches click handlers |
+| `openDetailPanel(id)` | Populates and opens the slide-in panel for a specific candidate |
+| `updateCandidateStatus(id, status)` | Mutates candidate status in-memory, re-renders everything |
+| `resetAllFilters()` | Clears all filter state, resets all UI inputs, shows toast |
+| `syncDropdownValue(id, values)` | Syncs dropdown UI when filters change externally (e.g., status card click) |
+
+### State Management
+
+All app state lives in one `state` object:
+
+```javascript
+const state = {
+  allCandidates: [],        // raw data from JSON
+  filteredCandidates: [],   // result after all filters applied
+  filters: {
+    search: "",             // search query (lowercased)
+    statuses: new Set(),    // selected status values
+    yoeMin: "",             // min years of experience
+    yoeMax: "",             // max years of experience
+    location: "",           // selected location
+    skills: new Set(),      // selected skill values
+  },
+  sort: { key: "name", dir: "asc" },
+  selectedCandidateId: null,
+};
+```
+
+### Custom Dropdown Component
+
+Built from scratch since native `<select>` doesn't support multi-select with checkboxes. Each dropdown instance:
+- Has its own `Set()` for tracking selected values
+- Exposes a `__setValues()` method for external syncing
+- Closes when clicking outside or selecting in single-select mode
+- Shows a count badge for multi-select, value text for single-select
+
+---
+
+## Dataset
+
+14 candidates with realistic Indian names, emails, and profiles. The data intentionally includes edge cases for testing:
+
+- 4 candidates with `phone: null`
+- 1 candidate with 0 years of experience (fresher)
+- 1 candidate with a very long name (Sai Kiran Teja Venkata Ramana Murthy)
+- 1 candidate with a very long email address
+- 1 candidate with only 1 skill
+- 1 candidate with 7 skills
+- 1 candidate with an apostrophe in the name (D'Souza)
+- All 6 statuses and all 4 sources are represented
+
+---
+
+## Known Limitations
+
+1. **Status updates reset on refresh** — data is in-memory, not persisted
+2. **No pagination** — fine for 14 records, would need it at 50+
+3. **Skills filter uses OR logic** — selecting "Java" + "Cypress" shows candidates with either, not both
+4. **No min/max validation** — entering Min YOE > Max YOE shows empty results silently
+5. **No confirmation on status change** — accidental updates are possible
+
+---
+
+## Running Locally
+
+```bash
+# Just open the file directly
+open index.html
+
+# Or use any local server
+python3 -m http.server 3000
+```
+
+Then go to `http://localhost:3000`
+
+---
+
+## Deploying to Netlify
+
+1. Push to GitHub
+2. Go to [app.netlify.com](https://app.netlify.com) → Add new site → Import from GitHub
+3. Select the repo, leave build command empty, publish directory as `.`
+4. Deploy
+
+The `netlify.toml` in the repo handles the config automatically.
+
+---
+
+## Documentation
+
+- [QA Test Checklist](docs/qa-test-checklist.md) — 50+ test scenarios, 10 edge cases, smoke test
+- [Product Note](docs/product-note.md) — design decisions, assumptions, improvements
+- [Appsmith Layout Plan](docs/appsmith-layout-plan.md) — widget mapping for Appsmith build
